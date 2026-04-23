@@ -147,64 +147,6 @@
     }
 
 
-    /* ── EMAIL FORM ──────────────────────────────────────────── */
-    .notify-wrap {
-      animation: fadeUp .9s .5s ease both;
-      margin-bottom: 28px;
-    }
-    .notify-label {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(12px, 1.6vw, 14px);
-      letter-spacing: .25em;
-      color: rgba(255,255,255,.55);
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .notify-form {
-      display: flex;
-      gap: 0;
-      max-width: 480px;
-      margin-inline: auto;
-      border: 1.5px solid rgba(244,124,32,.5);
-      border-radius: 4px;
-      overflow: hidden;
-      transition: border-color .2s;
-    }
-    .notify-form:focus-within { border-color: var(--orange); }
-    .notify-form input {
-      flex: 1;
-      background: rgba(255,255,255,.07);
-      border: none;
-      outline: none;
-      padding: 14px 20px;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-    }
-    .notify-form input::placeholder { color: rgba(255,255,255,.35); }
-    .notify-form button {
-      background: linear-gradient(135deg, var(--orange), var(--red));
-      border: none;
-      padding: 14px 28px;
-      color: #fff;
-      font-family: 'Oswald', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: opacity .2s, transform .1s;
-      white-space: nowrap;
-    }
-    .notify-form button:hover { opacity: .88; }
-    .notify-form button:active { transform: scale(.97); }
-    .notify-success {
-      display: none;
-      color: var(--orange);
-      font-family: 'Oswald', sans-serif;
-      letter-spacing: .15em;
-      font-size: 15px;
-    }
 
 
     /* ── FOOTER NOTE ─────────────────────────────────────────── */
@@ -302,15 +244,6 @@
     <div class="divider"></div>
 
 
-    <!-- EMAIL NOTIFY -->
-    <div class="notify-wrap">
-      <p class="notify-label">Be the first to know</p>
-      <form class="notify-form" id="notifyForm">
-        <input type="email" placeholder="Your email address" required />
-        <button type="submit">Notify Me</button>
-      </form>
-      <p class="notify-success" id="notifySuccess">🎉 &nbsp;You're on the list — see you soon!</p>
-    </div>
 
 
   </main>
@@ -335,12 +268,6 @@
     dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
     setInterval(() => goTo((current + 1) % slides.length), 5000);
 
-    // ── EMAIL FORM ────────────────────────────────────────────────
-    document.getElementById('notifyForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      this.style.display = 'none';
-      document.getElementById('notifySuccess').style.display = 'block';
-    });
   </script>
 </body>
 </html>
