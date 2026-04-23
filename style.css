@@ -1,0 +1,192 @@
+/* ── RESET ───────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: #0a0a0a; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+/* ── BRAND VARS ──────────────────────────── */
+:root {
+  --orange: #f47c20;
+  --orange-light: #f5a623;
+  --red: #c0392b;
+  --dark: #0a0a0a;
+  --surface: #111111;
+  --surface-2: #1a1a1a;
+  --text: #ffffff;
+  --text-muted: rgba(255,255,255,.6);
+  --text-dim: rgba(255,255,255,.3);
+  --gradient: linear-gradient(135deg, var(--orange), var(--red));
+  --gradient-text: linear-gradient(180deg, var(--orange-light), var(--red));
+}
+
+/* ── TYPOGRAPHY ──────────────────────────── */
+.font-display { font-family: 'Bebas Neue', sans-serif; }
+.font-ui      { font-family: 'Oswald', sans-serif; }
+.gradient-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── NAV ─────────────────────────────────── */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px;
+  background: rgba(10,10,10,.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(244,124,32,.15);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  transition: height .3s ease, border-color .3s ease;
+}
+.site-nav.scrolled {
+  height: 52px;
+  border-bottom-color: rgba(244,124,32,.35);
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: 4px;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-muted); text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+.nav-links a.active { color: var(--orange); }
+.nav-order {
+  background: var(--gradient);
+  padding: 9px 22px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px; letter-spacing: 2px; color: #fff;
+  border-radius: 2px; text-decoration: none;
+  transition: opacity .2s;
+}
+.nav-order:hover { opacity: .85; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.nav-hamburger span { display: block; width: 24px; height: 2px; background: #fff; transition: .3s; }
+.nav-drawer {
+  display: none; position: fixed; top: 64px; left: 0; right: 0;
+  background: rgba(10,10,10,.98); padding: 24px 48px; z-index: 99;
+  border-bottom: 1px solid #222;
+}
+.nav-drawer.open { display: block; }
+.nav-drawer a {
+  display: block; padding: 14px 0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 18px; letter-spacing: 3px;
+  color: var(--text-muted); text-decoration: none;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+/* ── PAGE OFFSET ─────────────────────────── */
+main { padding-top: 64px; }
+
+/* ── VIDEO BG ────────────────────────────── */
+.video-bg-wrap { position: relative; overflow: hidden; }
+.video-bg-wrap video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;
+}
+.video-bg-wrap .video-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to bottom, rgba(0,0,0,.45) 0%, rgba(0,0,0,.7) 100%);
+}
+.video-bg-wrap .video-content { position: relative; z-index: 2; }
+
+/* ── SECTION SHARED ──────────────────────── */
+.section-eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 11px; letter-spacing: 4px;
+  color: var(--orange); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 6vw, 80px);
+  letter-spacing: 3px; line-height: 1;
+}
+.section-rule {
+  width: 60px; height: 3px;
+  background: var(--gradient);
+  border-radius: 2px; margin: 16px 0 40px;
+}
+
+/* ── BUTTONS ─────────────────────────────── */
+.btn-primary {
+  display: inline-block;
+  background: var(--gradient);
+  padding: 13px 32px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px; letter-spacing: 2px; color: #fff;
+  border-radius: 2px; text-decoration: none;
+  transition: opacity .2s, transform .1s;
+}
+.btn-primary:hover { opacity: .88; }
+.btn-primary:active { transform: scale(.97); }
+.btn-outline {
+  display: inline-block;
+  border: 1.5px solid rgba(255,255,255,.4);
+  padding: 13px 32px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px; letter-spacing: 2px; color: #fff;
+  border-radius: 2px; text-decoration: none;
+  transition: border-color .2s, color .2s;
+}
+.btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+
+/* ── SCROLL ANIMATIONS ───────────────────── */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-scale { opacity: 0; transform: scale(.95); transition: opacity .4s ease, transform .4s ease; }
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+/* ── HIDDEN ──────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ── LIGHTBOX ────────────────────────────── */
+.lightbox {
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(0,0,0,.92);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.lightbox.hidden { display: none; }
+.lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 4px; }
+
+/* ── FOOTER ──────────────────────────────── */
+.site-footer {
+  background: #050505;
+  border-top: 1px solid #1a1a1a;
+  padding: 32px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 3px;
+  background: var(--gradient-text);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.footer-links { display: flex; gap: 24px; }
+.footer-links a {
+  font-family: 'Oswald', sans-serif; font-size: 11px;
+  letter-spacing: 2px; color: var(--text-dim); text-decoration: none;
+}
+.footer-copy { font-size: 11px; letter-spacing: 1px; color: var(--text-dim); }
+
+/* ── RESPONSIVE ──────────────────────────── */
+@media (max-width: 1024px) {
+  .nav-links, .nav-order { display: none; }
+  .nav-hamburger { display: flex; }
+  .site-nav { padding: 0 24px; }
+  .site-footer { flex-direction: column; text-align: center; padding: 24px; }
+}
