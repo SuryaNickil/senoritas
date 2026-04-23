@@ -1,273 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Senoritas | Coming Soon</title>
-  <meta name="description" content="Senoritas — Breakfast, Lunch & Dinner. Coming Soon." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Senoritas — Bold Flavors. Warm Vibes.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --orange: #f47c20;
-      --red:    #c0392b;
-      --dark:   #0a0a0a;
-      --white:  #ffffff;
-      --gray:   #999;
-    }
-
-    html, body {
-      height: 100%;
-      background: var(--dark);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* ── BACKGROUND SLIDESHOW ─────────────────────────────────── */
-    .bg-slideshow {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-    }
-    .bg-slideshow .slide {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transition: opacity 1.8s ease-in-out;
-    }
-    .bg-slideshow .slide.active { opacity: 1; }
-    .bg-slideshow::after {
+    /* ── GRAIN OVERLAY ── */
+    body::after {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.04;
+    }
+
+    /* ── HERO ── */
+    .hero-section {
+      position: relative; height: 100vh; overflow: hidden;
+    }
+    .hero-section video {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+      filter: brightness(0.55) saturate(1.1);
+    }
+    .hero-gradient {
+      position: absolute; inset: 0; z-index: 1;
       background:
-        linear-gradient(to bottom,
-          rgba(0,0,0,.72) 0%,
-          rgba(0,0,0,.45) 40%,
-          rgba(0,0,0,.75) 100%);
+        linear-gradient(to right, rgba(0,0,0,.85) 0%, rgba(0,0,0,.3) 60%, transparent 100%),
+        linear-gradient(to top, rgba(0,0,0,.9) 0%, transparent 50%);
     }
-
-    /* Slides — high-res Unsplash food photography */
-    .slide-1 { background-image: url('https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=1800&q=80'); }
-    .slide-2 { background-image: url('https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=1800&q=80'); }
-    .slide-3 { background-image: url('https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=1800&q=80'); }
-    .slide-4 { background-image: url('https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=1800&q=80'); }
-    .slide-5 { background-image: url('https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=1800&q=80'); }
-
-    /* ── LAYOUT ──────────────────────────────────────────────── */
-    .page {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 32px 24px 48px;
-      text-align: center;
+    .hero-content {
+      position: relative; z-index: 2;
+      height: 100%; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 0 64px 80px;
     }
-
-    /* ── LOGO ────────────────────────────────────────────────── */
-    .logo-wrap {
-      margin-bottom: 24px;
-      animation: fadeDown .9s ease both;
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
     }
-    .logo-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(60px, 12vw, 130px);
-      letter-spacing: .04em;
-      line-height: 1;
-      background: linear-gradient(180deg, #f5a623 0%, #e8621a 45%, #c0392b 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: none;
-      filter: drop-shadow(0 4px 24px rgba(200,60,30,.45));
-    }
-    .logo-banner {
-      display: inline-block;
-      background: linear-gradient(90deg, #8b1a12 0%, #c0392b 50%, #8b1a12 100%);
-      padding: 10px 40px;
-      margin-top: 6px;
-      clip-path: polygon(12px 0%, calc(100% - 12px) 0%, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0% 50%);
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(13px, 2vw, 18px);
-      font-weight: 600;
-      letter-spacing: .25em;
-      color: #fff;
-    }
-    .logo-banner span { margin: 0 10px; opacity: .7; }
-
-    /* ── COMING SOON HEADLINE ────────────────────────────────── */
-    .headline-wrap {
-      margin-bottom: 28px;
-      animation: fadeUp .9s .2s ease both;
-    }
-    .headline-eyebrow {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(11px, 1.6vw, 14px);
-      letter-spacing: .35em;
-      color: var(--orange);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .headline-main {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(44px, 8vw, 96px);
-      letter-spacing: .06em;
-      line-height: 1;
-      white-space: nowrap;
-      color: var(--white);
-      text-shadow: 0 2px 40px rgba(0,0,0,.9);
-    }
-    .headline-sub {
-      font-size: clamp(13px, 1.4vw, 15px);
-      font-weight: 300;
-      color: rgba(255,255,255,.65);
-      margin-top: 10px;
-      max-width: 380px;
-      margin-inline: auto;
-      line-height: 1.5;
-    }
-
-    /* ── DIVIDER ─────────────────────────────────────────────── */
-    .divider {
-      width: 80px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--orange), var(--red));
-      margin: 0 auto 28px;
-      border-radius: 2px;
-      animation: fadeUp .9s .3s ease both;
-    }
-
-
-
-
-    /* ── FOOTER NOTE ─────────────────────────────────────────── */
-    .footer-note {
-      position: fixed;
-      bottom: 24px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-size: 11px;
-      letter-spacing: .12em;
-      color: rgba(255,255,255,.2);
-      z-index: 2;
-      text-transform: uppercase;
-    }
-
-    /* ── SLIDE INDICATORS ────────────────────────────────────── */
-    .slide-dots {
-      position: fixed;
-      bottom: 50px;
-      right: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      z-index: 2;
-    }
-    .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.25);
-      transition: background .3s, transform .3s;
-      cursor: pointer;
-    }
-    .dot.active {
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 40px; height: 1px;
       background: var(--orange);
-      transform: scale(1.4);
+    }
+    .hero-eyebrow span {
+      font-family: 'Oswald', sans-serif; font-size: 11px;
+      letter-spacing: 5px; color: var(--orange); text-transform: uppercase;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(80px, 13vw, 180px);
+      line-height: .92; letter-spacing: 4px; color: #fff;
+      margin-bottom: 32px;
+    }
+    .hero-title em {
+      font-style: normal;
+      background: var(--gradient-text);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-ctas { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .hero-scroll {
+      position: absolute; right: 48px; bottom: 80px; z-index: 3;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .hero-scroll span {
+      font-family: 'Oswald', sans-serif; font-size: 10px;
+      letter-spacing: 4px; color: var(--text-dim);
+      writing-mode: vertical-rl; text-orientation: mixed;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 60px;
+      background: linear-gradient(to bottom, var(--orange), transparent);
+      animation: scroll-pulse 2s ease-in-out infinite;
+    }
+    @keyframes scroll-pulse {
+      0%, 100% { opacity: .3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
     }
 
-    /* ── ANIMATIONS ──────────────────────────────────────────── */
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-28px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* ── TICKER ── */
+    .ticker-wrap {
+      background: var(--red); overflow: hidden;
+      border-top: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      padding: 14px 0;
     }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .ticker {
+      display: flex; gap: 0;
+      animation: ticker-scroll 18s linear infinite;
+      width: max-content;
+    }
+    .ticker-item {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px; letter-spacing: 6px; color: #fff;
+      padding: 0 40px; white-space: nowrap; opacity: .9;
+    }
+    .ticker-dot {
+      font-size: 8px; color: rgba(255,255,255,.5);
+      align-self: center; padding: 0 10px;
+    }
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
     }
 
-    /* ── RESPONSIVE ──────────────────────────────────────────── */
-    @media (max-width: 520px) {
-      .countdown-sep { display: none; }
-      .notify-form { flex-direction: column; border-radius: 6px; }
-      .notify-form button { border-radius: 0; }
-      .logo-banner { clip-path: none; border-radius: 4px; }
+    /* ── MEAL BANDS ── */
+    .meal-bands { display: grid; grid-template-columns: repeat(3,1fr); }
+    .meal-band {
+      position: relative; height: 420px; overflow: hidden; cursor: pointer;
+    }
+    .meal-band video {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+      transition: filter .6s ease, transform .8s ease;
+      filter: brightness(0.45) saturate(0.9);
+    }
+    .meal-band:hover video {
+      filter: brightness(0.65) saturate(1.2);
+      transform: scale(1.04);
+    }
+    .meal-band-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to bottom, transparent 20%, rgba(0,0,0,.85) 100%);
+    }
+    .meal-band-content {
+      position: absolute; inset: 0; z-index: 2;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 36px 32px;
+    }
+    .meal-band-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 56px; letter-spacing: 4px; color: #fff;
+      line-height: 1; margin-bottom: 10px;
+      transition: transform .4s ease;
+    }
+    .meal-band:hover .meal-band-label { transform: translateY(-4px); }
+    .meal-band-hours {
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px; letter-spacing: 3px; color: var(--orange);
+      margin-bottom: 16px;
+    }
+    .meal-band-rule {
+      width: 0; height: 2px;
+      background: var(--gradient);
+      transition: width .5s ease .1s;
+    }
+    .meal-band:hover .meal-band-rule { width: 48px; }
+    .meal-band-link {
+      position: absolute; top: 24px; right: 24px; z-index: 3;
+      font-family: 'Oswald', sans-serif; font-size: 11px;
+      letter-spacing: 2px; color: rgba(255,255,255,0);
+      text-decoration: none; transition: color .3s;
+    }
+    .meal-band:hover .meal-band-link { color: var(--text-muted); }
+    .meal-band-divider {
+      position: absolute; top: 0; left: 0; bottom: 0;
+      width: 1px; background: rgba(255,255,255,.06); z-index: 3;
+    }
+
+    /* ── WHY SECTION ── */
+    .why-section {
+      background: var(--dark);
+      padding: 120px 64px;
+      position: relative;
+      border-top: 1px solid #1a1a1a;
+    }
+    .why-section::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+    .why-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 80px; position: relative;
+    }
+    .why-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(120px, 16vw, 220px);
+      color: rgba(255,255,255,.03);
+      line-height: 1; position: absolute; right: 0; top: -40px;
+      pointer-events: none; user-select: none;
+    }
+    .why-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+    .why-card {
+      background: #0f0f0f;
+      padding: 48px 40px; position: relative;
+      transition: background .3s;
+    }
+    .why-card:hover { background: #131313; }
+    .why-card-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px; letter-spacing: 3px; color: var(--orange);
+      margin-bottom: 24px; display: block;
+    }
+    .why-card-icon { font-size: 32px; margin-bottom: 20px; display: block; }
+    .why-card-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 18px; letter-spacing: 2px; color: #fff;
+      margin-bottom: 12px; text-transform: uppercase;
+    }
+    .why-card-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px; line-height: 1.8; color: var(--text-muted);
+    }
+    .why-card-accent {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: var(--gradient);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .4s ease;
+    }
+    .why-card:hover .why-card-accent { transform: scaleX(1); }
+
+    /* ── CTA SPLIT ── */
+    .cta-section {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 420px;
+    }
+    .cta-left {
+      background: var(--gradient);
+      padding: 80px 64px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-left::before {
+      content: 'ORDER';
+      position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 200px; color: rgba(0,0,0,.15);
+      line-height: 1; pointer-events: none; user-select: none;
+    }
+    .cta-left h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 5vw, 80px);
+      letter-spacing: 3px; color: #fff; line-height: 1;
+      margin-bottom: 12px; position: relative;
+    }
+    .cta-left p {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px; letter-spacing: 3px; color: rgba(255,255,255,.7);
+      margin-bottom: 40px; position: relative; text-transform: uppercase;
+    }
+    .cta-right {
+      background: #080808;
+      padding: 80px 64px;
+      display: flex; flex-direction: column; justify-content: center;
+      border-left: 1px solid #1a1a1a;
+    }
+    .cta-right-hours {
+      margin-bottom: 40px;
+    }
+    .cta-right-hours h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px; letter-spacing: 4px; color: var(--orange);
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .hours-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid #1a1a1a;
+      font-family: 'Oswald', sans-serif;
+    }
+    .hours-row span:first-child {
+      font-size: 13px; letter-spacing: 2px; color: var(--text-muted);
+    }
+    .hours-row span:last-child {
+      font-size: 13px; letter-spacing: 1px; color: #fff;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-content { padding: 0 32px 60px; }
+      .hero-scroll { display: none; }
+      .meal-bands { grid-template-columns: 1fr; }
+      .meal-band { height: 300px; }
+      .why-section { padding: 80px 32px; }
+      .why-cards { grid-template-columns: 1fr; gap: 2px; }
+      .cta-section { grid-template-columns: 1fr; }
+      .cta-left, .cta-right { padding: 60px 32px; }
+    }
+    @media (max-width: 640px) {
+      .hero-title { font-size: clamp(60px, 16vw, 100px); }
+      .hero-content { padding: 0 24px 48px; }
     }
   </style>
 </head>
 <body>
+  <div id="nav-placeholder"></div>
 
-  <!-- BACKGROUND SLIDESHOW -->
-  <div class="bg-slideshow" id="slideshow">
-    <div class="slide slide-1 active"></div>
-    <div class="slide slide-2"></div>
-    <div class="slide slide-3"></div>
-    <div class="slide slide-4"></div>
-    <div class="slide slide-5"></div>
-  </div>
+  <main style="padding-top:0">
 
-  <!-- SLIDE DOTS -->
-  <div class="slide-dots" id="dots">
-    <div class="dot active" data-index="0"></div>
-    <div class="dot" data-index="1"></div>
-    <div class="dot" data-index="2"></div>
-    <div class="dot" data-index="3"></div>
-    <div class="dot" data-index="4"></div>
-  </div>
+    <!-- ═══════════ HERO ═══════════ -->
+    <section class="hero-section">
+      <video src="assets/videos/hero.mp4" autoplay muted loop playsinline
+        poster="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=1920&q=80"></video>
+      <div class="hero-gradient"></div>
 
-  <!-- MAIN CONTENT -->
-  <main class="page">
+      <div class="hero-content">
+        <div class="hero-eyebrow reveal">
+          <span>Breakfast · Lunch · Dinner</span>
+        </div>
+        <h1 class="hero-title reveal">
+          BOLD<br><em>FLAVORS.</em><br>WARM VIBES.
+        </h1>
+        <div class="hero-ctas reveal">
+          <a href="menu.html" class="btn-primary" style="font-size:13px;letter-spacing:3px;padding:14px 36px">VIEW MENU</a>
+          <a href="https://www.toasttab.com/senoritas" target="_blank" class="btn-outline" style="font-size:13px;letter-spacing:3px;padding:14px 36px">ORDER ONLINE</a>
+        </div>
+      </div>
 
-    <!-- LOGO -->
-    <div class="logo-wrap">
-      <div class="logo-title">SENORITAS</div>
-      <div class="logo-banner">BREAKFAST<span>•</span>LUNCH<span>•</span>DINNER</div>
+      <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        <span>SCROLL</span>
+      </div>
+    </section>
+
+    <!-- ═══════════ TICKER ═══════════ -->
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <span class="ticker-item">BREAKFAST</span><span class="ticker-dot">✦</span>
+        <span class="ticker-item">LUNCH</span><span class="ticker-dot">✦</span>
+        <span class="ticker-item">DINNER</span><span class="ticker-dot">✦</span>
+        <span class="ticker-item">FRESH DAILY</span><span class="ticker-dot">✦</span>
+        <span class="ticker-item">FAMILY RECIPES</span><span class="ticker-dot">✦</span>
+        <span class="ticker-item">BOLD FLAVORS</span><span class="ticker-dot">✦</span>
+        <span class="ticker-item">WARM VIBES</span><span class="ticker-dot">✦</span>
+        <!-- duplicate for seamless loop -->
+        <span class="ticker-item">BREAKFAST</span><span class="ticker-dot">✦</span>
+        <span class="ticker-item">LUNCH</span><span class="ticker-dot">✦</span>
+        <span class="ticker-item">DINNER</span><span class="ticker-dot">✦</span>
+        <span class="ticker-item">FRESH DAILY</span><span class="ticker-dot">✦</span>
+        <span class="ticker-item">FAMILY RECIPES</span><span class="ticker-dot">✦</span>
+        <span class="ticker-item">BOLD FLAVORS</span><span class="ticker-dot">✦</span>
+        <span class="ticker-item">WARM VIBES</span><span class="ticker-dot">✦</span>
+      </div>
     </div>
 
-    <!-- HEADLINE -->
-    <div class="headline-wrap">
-      <p class="headline-eyebrow">Something delicious is on its way</p>
-      <h1 class="headline-main">COMING SOON</h1>
-      <p class="headline-sub">Bold flavors, warm vibes & unforgettable meals — opening soon.</p>
+    <!-- ═══════════ MEAL BANDS ═══════════ -->
+    <div class="meal-bands">
+      <!-- Breakfast -->
+      <div class="meal-band reveal-scale">
+        <video src="assets/videos/breakfast.mp4" autoplay muted loop playsinline></video>
+        <div class="meal-band-overlay"></div>
+        <div class="meal-band-content">
+          <div class="meal-band-hours">7:00 AM – 11:00 AM</div>
+          <div class="meal-band-label">BREAKFAST</div>
+          <div class="meal-band-rule"></div>
+        </div>
+        <a href="menu.html" class="meal-band-link">VIEW MENU →</a>
+      </div>
+      <!-- Lunch -->
+      <div class="meal-band reveal-scale">
+        <div class="meal-band-divider"></div>
+        <video src="assets/videos/lunch.mp4" autoplay muted loop playsinline></video>
+        <div class="meal-band-overlay"></div>
+        <div class="meal-band-content">
+          <div class="meal-band-hours">11:00 AM – 4:00 PM</div>
+          <div class="meal-band-label">LUNCH</div>
+          <div class="meal-band-rule"></div>
+        </div>
+        <a href="menu.html" class="meal-band-link">VIEW MENU →</a>
+      </div>
+      <!-- Dinner -->
+      <div class="meal-band reveal-scale">
+        <div class="meal-band-divider"></div>
+        <video src="assets/videos/dinner.mp4" autoplay muted loop playsinline></video>
+        <div class="meal-band-overlay"></div>
+        <div class="meal-band-content">
+          <div class="meal-band-hours">4:00 PM – 10:00 PM</div>
+          <div class="meal-band-label">DINNER</div>
+          <div class="meal-band-rule"></div>
+        </div>
+        <a href="menu.html" class="meal-band-link">VIEW MENU →</a>
+      </div>
     </div>
 
-    <div class="divider"></div>
+    <!-- ═══════════ WHY SENORITAS ═══════════ -->
+    <section class="why-section">
+      <div class="why-header reveal">
+        <div>
+          <p class="section-eyebrow" style="margin-bottom:12px">Why Senoritas</p>
+          <h2 class="section-title" style="color:#fff">MADE WITH<br>PASSION.</h2>
+          <div class="section-rule"></div>
+        </div>
+        <div class="why-number">03</div>
+      </div>
+      <div class="why-cards" data-stagger>
+        <div class="why-card reveal" style="position:relative">
+          <div class="why-card-accent"></div>
+          <span class="why-card-num">01</span>
+          <span class="why-card-icon">🌿</span>
+          <h3 class="why-card-title">Fresh Ingredients</h3>
+          <p class="why-card-body">We source quality ingredients locally — from farm to table, every plate reflects our commitment to freshness and authentic flavor.</p>
+        </div>
+        <div class="why-card reveal" style="position:relative">
+          <div class="why-card-accent"></div>
+          <span class="why-card-num">02</span>
+          <span class="why-card-icon">👨‍👩‍👧</span>
+          <h3 class="why-card-title">Family Recipes</h3>
+          <p class="why-card-body">Generations of tradition in every bite. Our recipes carry the warmth of family kitchens and the soul of our heritage.</p>
+        </div>
+        <div class="why-card reveal" style="position:relative">
+          <div class="why-card-accent"></div>
+          <span class="why-card-num">03</span>
+          <span class="why-card-icon">🔥</span>
+          <h3 class="why-card-title">Made Fresh Daily</h3>
+          <p class="why-card-body">No shortcuts. No shortcuts. Everything is prepared fresh every morning — because great food deserves the time it takes.</p>
+        </div>
+      </div>
+    </section>
 
-
-
+    <!-- ═══════════ CTA SPLIT ═══════════ -->
+    <div class="cta-section">
+      <div class="cta-left">
+        <h2 class="reveal">HUNGRY?<br>ORDER<br>ONLINE.</h2>
+        <p class="reveal">Fast · Fresh · Always Delivered Hot</p>
+        <a href="https://www.toasttab.com/senoritas" target="_blank"
+          class="btn-outline reveal"
+          style="align-self:flex-start;border-color:rgba(255,255,255,.5);padding:15px 40px;font-size:13px;letter-spacing:3px">
+          ORDER NOW →
+        </a>
+      </div>
+      <div class="cta-right">
+        <div class="cta-right-hours reveal">
+          <h3>HOURS</h3>
+          <div class="hours-row">
+            <span>Breakfast</span><span>7:00 AM – 11:00 AM</span>
+          </div>
+          <div class="hours-row">
+            <span>Lunch</span><span>11:00 AM – 4:00 PM</span>
+          </div>
+          <div class="hours-row">
+            <span>Dinner</span><span>4:00 PM – 10:00 PM</span>
+          </div>
+          <!-- TODO: update actual hours -->
+        </div>
+        <a href="contact.html" class="reveal" style="font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:3px;color:var(--orange);text-decoration:none;text-transform:uppercase">
+          Find Us → Contact Page
+        </a>
+      </div>
+    </div>
 
   </main>
 
-  <p class="footer-note">© 2025 Senoritas Restaurant &nbsp;·&nbsp; All Rights Reserved</p>
-
-  <script>
-
-    // ── SLIDESHOW ─────────────────────────────────────────────────
-    const slides = document.querySelectorAll('.slide');
-    const dots   = document.querySelectorAll('.dot');
-    let current  = 0;
-
-    function goTo(n) {
-      slides[current].classList.remove('active');
-      dots[current].classList.remove('active');
-      current = n;
-      slides[current].classList.add('active');
-      dots[current].classList.add('active');
-    }
-
-    dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
-    setInterval(() => goTo((current + 1) % slides.length), 5000);
-
-  </script>
+  <div id="footer-placeholder"></div>
+  <script src="script.js"></script>
 </body>
 </html>
