@@ -25,10 +25,10 @@ const NAV_HTML = `
 
 const FOOTER_HTML = `
 <footer class="site-footer">
-  <div>
+  <div class="footer-brand">
     <div class="footer-logo">SENORITAS</div>
     <p style="font-size:11px;color:rgba(255,255,255,.3);letter-spacing:2px;margin-top:4px">BREAKFAST · LUNCH · DINNER</p>
-    <p style="font-size:11px;color:rgba(255,255,255,.3);margin-top:4px"><!-- TODO: update hours --> Mon–Sun: 7:00 AM – 10:00 PM</p>
+    <p style="font-size:11px;color:rgba(255,255,255,.3);margin-top:4px">Mon–Sun: 7:00 AM – 10:00 PM</p>
   </div>
   <nav class="footer-links">
     <a href="menu.html">Menu</a>
@@ -36,6 +36,11 @@ const FOOTER_HTML = `
     <a href="gallery.html">Gallery</a>
     <a href="contact.html">Contact</a>
   </nav>
+  <div class="footer-contact">
+    <p>2303 HWY 36 S, Ste#D<br>Sealy, TX 77474</p>
+    <a href="tel:+18329044440">(832) 904-4440</a>
+    <a href="mailto:contact@senoritassportsbar.com">contact@senoritassportsbar.com</a>
+  </div>
   <p class="footer-copy">© 2025 SENORITAS RESTAURANT · ALL RIGHTS RESERVED</p>
 </footer>`;
 

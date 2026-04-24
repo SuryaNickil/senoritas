@@ -181,7 +181,19 @@ main { padding-top: 64px; }
   font-family: 'Oswald', sans-serif; font-size: 11px;
   letter-spacing: 2px; color: var(--text-dim); text-decoration: none;
 }
-.footer-copy { font-size: 11px; letter-spacing: 1px; color: var(--text-dim); }
+.footer-contact {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.footer-contact p {
+  font-size: 11px; color: rgba(255,255,255,.3); line-height: 1.6;
+}
+.footer-contact a {
+  font-family: 'Oswald', sans-serif; font-size: 11px;
+  letter-spacing: 1px; color: var(--text-dim); text-decoration: none;
+  transition: color .2s;
+}
+.footer-contact a:hover { color: var(--orange); }
+.footer-copy { font-size: 11px; letter-spacing: 1px; color: var(--text-dim); width: 100%; text-align: center; padding-top: 16px; border-top: 1px solid #1a1a1a; }
 
 /* ── RESPONSIVE ──────────────────────────── */
 @media (max-width: 1024px) {
