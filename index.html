@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Senoritas — Bold Flavors. Warm Vibes.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css">
   <style>
     /* ── GRAIN OVERLAY ── */
@@ -299,7 +300,7 @@
 
     <!-- ═══════════ HERO ═══════════ -->
     <section class="hero-section">
-      <video src="assets/videos/hero.mp4" autoplay muted loop playsinline
+      <video src="assets/videos/hero.mp4" autoplay muted loop playsinline preload="metadata"
         poster="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=1920&q=80"></video>
       <div class="hero-gradient"></div>
       <div class="hero-gradient-dir"></div>
@@ -348,7 +349,7 @@
     <div class="meal-bands">
       <!-- Breakfast -->
       <div class="meal-band reveal-scale">
-        <video src="assets/videos/breakfast.mp4" autoplay muted loop playsinline></video>
+        <video src="assets/videos/breakfast.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="meal-band-overlay"></div>
         <div class="meal-band-content">
           <div class="meal-band-hours">7:00 AM – 11:00 AM</div>
@@ -360,7 +361,7 @@
       <!-- Lunch -->
       <div class="meal-band reveal-scale">
         <div class="meal-band-divider"></div>
-        <video src="assets/videos/lunch.mp4" autoplay muted loop playsinline></video>
+        <video src="assets/videos/lunch.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="meal-band-overlay"></div>
         <div class="meal-band-content">
           <div class="meal-band-hours">11:00 AM – 4:00 PM</div>
@@ -372,7 +373,7 @@
       <!-- Dinner -->
       <div class="meal-band reveal-scale">
         <div class="meal-band-divider"></div>
-        <video src="assets/videos/dinner.mp4" autoplay muted loop playsinline></video>
+        <video src="assets/videos/dinner.mp4" autoplay muted loop playsinline preload="none"></video>
         <div class="meal-band-overlay"></div>
         <div class="meal-band-content">
           <div class="meal-band-hours">4:00 PM – 10:00 PM</div>
