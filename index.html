@@ -129,76 +129,81 @@
     /* ── MEAL BANDS ── */
     .meal-bands {
       display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 2px; background: rgba(255,255,255,0.04);
+      gap: 16px; padding: 24px 24px;
+      background: transparent;
     }
     .meal-band {
-      position: relative; height: 440px; overflow: hidden; cursor: pointer;
+      position: relative; height: 460px;
+      overflow: hidden; cursor: pointer;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+    .meal-band:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.12), 0 0 0 1px rgba(244,124,32,0.15);
     }
     .meal-band video {
       position: absolute; inset: 0; width: 100%; height: 100%;
       object-fit: cover; z-index: 0;
       transition: filter .7s ease, transform .9s ease;
-      filter: brightness(0.55) saturate(1.0);
+      filter: brightness(0.58) saturate(1.05);
     }
     .meal-band:hover video {
       filter: brightness(0.72) saturate(1.15);
-      transform: scale(1.05);
+      transform: scale(1.04);
     }
-    /* glass card at bottom */
     .meal-band-overlay {
       position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(to bottom, transparent 35%, rgba(0,0,0,0.75) 100%);
+      background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.70) 100%);
+      border-radius: 24px;
     }
     .meal-band-content {
       position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
-      padding: 0 28px 28px;
+      padding: 0 20px 20px;
     }
     .meal-band-glass {
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      background: rgba(15,15,15,0.55);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
       border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
-      padding: 24px 24px 20px;
-      transition: background .4s, box-shadow .4s;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07);
+      padding: 20px 20px 18px;
+      transition: background .3s, border-color .3s;
     }
     .meal-band:hover .meal-band-glass {
-      background: rgba(255,255,255,0.09);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.12), 0 0 0 1px rgba(244,124,32,0.12);
+      background: rgba(20,20,20,0.65);
+      border-color: rgba(244,124,32,0.20);
     }
     .meal-band-label {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 52px; letter-spacing: 4px; color: #fff;
-      line-height: 1; margin-bottom: 8px;
-      transition: transform .4s ease;
+      font-size: 48px; letter-spacing: 4px; color: #fff;
+      line-height: 1; margin-bottom: 6px;
     }
-    .meal-band:hover .meal-band-label { transform: translateY(-2px); }
     .meal-band-hours {
       font-family: 'Oswald', sans-serif;
       font-size: 11px; letter-spacing: 3px; color: var(--orange-light);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
-    .meal-band-rule {
-      width: 0; height: 1.5px;
-      background: var(--gradient);
-      border-radius: 1px;
-      transition: width .5s ease .1s;
-    }
-    .meal-band:hover .meal-band-rule { width: 40px; }
-    .meal-band-link {
-      position: absolute; top: 20px; right: 20px; z-index: 3;
-      font-family: 'Oswald', sans-serif; font-size: 10px;
-      letter-spacing: 2px; color: rgba(255,255,255,0);
-      text-decoration: none; transition: color .3s;
+    .meal-band-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Oswald', sans-serif; font-size: 11px;
+      letter-spacing: 2px; color: rgba(255,255,255,.75);
+      text-decoration: none; text-transform: uppercase;
       background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.14);
       border-radius: 100px;
-      padding: 7px 14px;
+      padding: 8px 16px;
+      transition: background .25s, border-color .25s, color .25s;
     }
-    .meal-band:hover .meal-band-link { color: rgba(255,255,255,.8); }
+    .meal-band-cta:hover {
+      background: rgba(244,124,32,0.15);
+      border-color: rgba(244,124,32,0.35);
+      color: var(--orange-light);
+    }
 
     /* ── CTA SPLIT ── */
     .cta-section {
@@ -270,8 +275,8 @@
     @media (max-width: 1024px) {
       .hero-content { padding: 0 32px 60px; }
       .hero-scroll { display: none; }
-      .meal-bands { grid-template-columns: 1fr; gap: 2px; }
-      .meal-band { height: 320px; }
+      .meal-bands { grid-template-columns: 1fr; gap: 12px; padding: 16px; }
+      .meal-band { height: 300px; }
       .cta-section { grid-template-columns: 1fr; }
       .cta-left, .cta-right { padding: 60px 32px; }
     }
@@ -343,10 +348,9 @@
           <div class="meal-band-glass">
             <div class="meal-band-hours">7:00 AM – 11:00 AM</div>
             <div class="meal-band-label">BREAKFAST</div>
-            <div class="meal-band-rule"></div>
+            <a href="menu.html" class="meal-band-cta">View Menu →</a>
           </div>
         </div>
-        <a href="menu.html" class="meal-band-link">VIEW MENU →</a>
       </div>
       <!-- Lunch -->
       <div class="meal-band reveal-scale">
@@ -356,10 +360,9 @@
           <div class="meal-band-glass">
             <div class="meal-band-hours">11:00 AM – 4:00 PM</div>
             <div class="meal-band-label">LUNCH</div>
-            <div class="meal-band-rule"></div>
+            <a href="menu.html" class="meal-band-cta">View Menu →</a>
           </div>
         </div>
-        <a href="menu.html" class="meal-band-link">VIEW MENU →</a>
       </div>
       <!-- Dinner -->
       <div class="meal-band reveal-scale">
@@ -369,10 +372,9 @@
           <div class="meal-band-glass">
             <div class="meal-band-hours">4:00 PM – 10:00 PM</div>
             <div class="meal-band-label">DINNER</div>
-            <div class="meal-band-rule"></div>
+            <a href="menu.html" class="meal-band-cta">View Menu →</a>
           </div>
         </div>
-        <a href="menu.html" class="meal-band-link">VIEW MENU →</a>
       </div>
     </div>
 
